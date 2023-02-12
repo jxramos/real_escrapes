@@ -16,8 +16,26 @@ function processTruliaPropertyPage() {
                                     "-" + String(accessDate.getMonth()+1).padStart(2, '0') +
                                     "-" + String(accessDate.getDate()).padStart(2, '0');
     // Scrape Price
+    h3_elements = document.getElementsByTagName("h3");
+    for (let i = 1; i < h3_elements.length; i++) {
+        var h3_element = h3_elements[i]
+        let data_test_id = h3_element.getAttribute("data-testid");
+        if (data_test_id == "on-market-price-details" ) {
+            property_data["Price"] = h3_element.innerText
+            break;
+        }
+    }
 
     // Scrape Address
+    div_elements = document.getElementsByTagName("div");
+    for (let i = 1; i < div_elements.length; i++) {
+        var div_element = div_elements[i]
+        let data_test_id = div_element.getAttribute("data-testid");
+        if (data_test_id == "home-details-summary-address" ) {
+            property_data["Address"] = div_element.innerText.replace("\n", "; ")
+            break;
+        }
+    }
 
     // Scrape Year Built
 
