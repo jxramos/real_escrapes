@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Real Escrapes",
+  "description": "Extension to save property information to structured file on disk.",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.trulia.com/p/*"
+      ],
+      "js": [
+        "real_estate_sites/trulia.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ]
+}
