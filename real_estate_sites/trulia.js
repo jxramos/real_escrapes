@@ -39,13 +39,30 @@ function processTruliaPropertyPage() {
 
     // Scrape Year Built
 
-    // Scrape Square Footage
+    // Scrape Number of Bedrooms, Number of Baths, and Square Footage
+    ul_elements = document.getElementsByTagName("ul");
+    for (let i = 1; i < ul_elements.length; i++) {
+        var ul_element = ul_elements[i]
+        let data_test_id = ul_element.getAttribute("data-testid");
+        if (data_test_id == "facts-list") {
+            break;
+        }
+    }
+    property_data["Beds"] = ul_element.children[0].innerText;
+    property_data["Baths"] = ul_element.children[1].innerText;
+    property_data["sqft"] =  ul_element.children[2].innerText;
 
     // Scrape Days on Market
 
-    // Scrape Number of Bedrooms
-
-    // Scrape Number of Bathrooms
+    // Scrape Property Type
+    span_elements = document.getElementsByTagName("span");
+    for (let i = 1; i < span_elements.length; i++) {
+        var span_element = span_elements[i]
+        if (span_element.innerText.startsWith("Property Type: ")) {
+            property_data["Property Type"] = span_element.innerText
+            break;
+        }
+    }
 
     // Persist property data to disk
     downloadPropertyDataAsJson(property_data)
