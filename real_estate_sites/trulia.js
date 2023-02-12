@@ -26,13 +26,16 @@ function processTruliaPropertyPage() {
         }
     }
 
-    // Scrape Address
+    // Scrape Address, Listing Date
     div_elements = document.getElementsByTagName("div");
     for (let i = 1; i < div_elements.length; i++) {
         var div_element = div_elements[i]
         let data_test_id = div_element.getAttribute("data-testid");
         if (data_test_id == "home-details-summary-address" ) {
             property_data["Address"] = div_element.innerText.replace("\n", "; ")
+        } else if (data_test_id == "seo-description-paragraph") {
+            seo_desc = div_element.innerText.split(" on ")[1];
+            property_data["Listing Date"] = seo_desc.substring(0,seo_desc.length-1);
             break;
         }
     }
@@ -51,8 +54,6 @@ function processTruliaPropertyPage() {
     property_data["Beds"] = ul_element.children[0].innerText;
     property_data["Baths"] = ul_element.children[1].innerText;
     property_data["sqft"] =  ul_element.children[2].innerText;
-
-    // Scrape Days on Market
 
     // Scrape Property Type
     span_elements = document.getElementsByTagName("span");
