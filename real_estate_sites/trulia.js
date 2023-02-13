@@ -77,5 +77,12 @@ function downloadPropertyDataAsJson(property_data) {
     downloadContent(filename, transactionJson);
 }
 
+function downloadContent(filename, content) {
+    let a = document.createElement('a');
+    a.href = "data:application/octet-stream,"+encodeURIComponent(content);
+    a.download = filename;
+    a.click();
+}
+
 
 processTruliaPropertyPage();
