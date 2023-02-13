@@ -34,7 +34,7 @@ function processTruliaPropertyPage() {
         if (data_test_id == "home-details-summary-address" ) {
             property_data["Address"] = div_element.innerText.replace("\n", "; ")
         } else if (data_test_id == "seo-description-paragraph") {
-            seo_desc = div_element.innerText.split(" on ")[1];
+            seo_desc = div_element.innerText.split(" on ")[1].replace(". This property is pet friendly", "");
             property_data["Listing Date"] = seo_desc.substring(0,seo_desc.length-1);
             break;
         }
