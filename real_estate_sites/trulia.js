@@ -60,7 +60,7 @@ function processTruliaPropertyPage() {
     for (let i = 1; i < span_elements.length; i++) {
         var span_element = span_elements[i]
         if (span_element.innerText.startsWith("Property Type: ")) {
-            property_data["Property Type"] = span_element.innerText
+            property_data["Property Type"] = span_element.innerText.replace("Property Type: ", "")
             break;
         }
     }
